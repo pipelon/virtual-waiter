@@ -83,7 +83,7 @@ class ExecutiveMenusController extends Controller {
             $model->salad_options_json = $this->buildJsonOptions('SaladOption');
 
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
         }
 
@@ -167,7 +167,7 @@ class ExecutiveMenusController extends Controller {
 
 
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
         }
 

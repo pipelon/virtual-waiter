@@ -22,14 +22,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
 
-                                                                                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-                    
-                                                            <?= GridView::widget([
+                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+                    <?=
+                    GridView::widget([
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
                         'columns' => [
-                        
-                                                    'id',
+                            'id',
                             [
                                 'attribute' => 'category_id',
                                 'format' => 'raw',
@@ -43,7 +43,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                         , 'id', 'name')
                             ],
                             'name',
-                            'price',
+                            [
+                                'attribute' => 'price',
+                                'format' => 'raw',
+                                'value' => function ($data) {
+
+                                    return '$ '
+                                            . number_format(
+                                                    $data->price,
+                                                    0,
+                                                    ',',
+                                                    '.'
+                                    );
+                                },
+                            ],
                             //'image',
                             [
                                 'attribute' => 'active',
@@ -59,16 +72,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             //'created_by',
                             //'modified',
                             //'modified_by',
-
-                        ['class' => 'hail812\adminlte3\yii\grid\ActionColumn'],
+                            ['class' => 'hail812\adminlte3\yii\grid\ActionColumn'],
                         ],
                         'summaryOptions' => ['class' => 'summary mb-2'],
                         'pager' => [
-                        'class' => 'yii\bootstrap4\LinkPager',
+                            'class' => 'yii\bootstrap4\LinkPager',
                         ]
-                        ]); ?>
-                    
-                    
+                    ]);
+                    ?>
+
+
                 </div>
                 <!--.card-body-->
             </div>
