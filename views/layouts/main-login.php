@@ -1,0 +1,57 @@
+<?php
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+\hail812\adminlte3\assets\AdminLteAsset::register($this);
+$this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
+$this->registerCssFile('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+\hail812\adminlte3\assets\PluginAsset::register($this)->add(['fontawesome', 'icheck-bootstrap']);
+?>
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Sara | Acceso</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?php $this->registerCsrfMetaTags() ?>
+        <?php $this->head() ?>
+        <style type="text/css">
+            .login-page{
+                background: #FFFFFF
+            }
+            .btn.btn-primary.btn-block.btn-login-happiness{
+                background: #be1e2d;
+                border: 1px solid #be1e2d;
+            }
+            .icheck-primary > input:first-child:checked + input[type="hidden"] + label::before, .icheck-primary > input:first-child:checked + label::before {
+                background-color: #be1e2d;
+                border-color: #be1e2d;
+            }
+        </style>
+    </head>
+    <body class="hold-transition login-page">
+        <?php $this->beginBody() ?>
+        <div class="login-box">
+            <div class="login-logo">
+                <?=
+                \yii\helpers\Html::img("@web/images/logoSara.png",
+                        [
+                            'alt' => 'Logo Sara',
+                            'width' => '300px'
+                ]
+                        )
+                ?>
+            </div>
+            <!-- /.login-logo -->
+
+            <?= $content ?>
+        </div>
+        <!-- /.login-box -->
+
+        <?php $this->endBody() ?>
+    </body>
+</html>
+<?php $this->endPage() ?>
