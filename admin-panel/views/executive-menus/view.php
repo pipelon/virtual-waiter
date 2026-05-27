@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\ExecutiveMenus */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Executive Menuses', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Menús', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

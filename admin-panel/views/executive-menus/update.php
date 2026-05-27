@@ -3,10 +3,10 @@
 /* @var $this yii\web\View */
 /* @var $model app\models\ExecutiveMenus */
 
-$this->title = 'Actualizar Executive Menus: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Executive Menuses', 'url' => ['index']];
+$this->title = 'Actualizar menú: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Menús', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 
 <div class="container-fluid">

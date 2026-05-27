@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ExecutiveMenus */
 
-$this->title = 'Crear Executive Menus';
-$this->params['breadcrumbs'][] = ['label' => 'Executive Menuses', 'url' => ['index']];
+$this->title = 'Crear menú ejecutivo';
+$this->params['breadcrumbs'][] = ['label' => 'Menús', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

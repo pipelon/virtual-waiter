@@ -24,8 +24,7 @@ use Yii;
  * @property string $modified Modificado
  * @property string $modified_by Fecha de última actualización
  */
-class ExecutiveMenus extends \yii\db\ActiveRecord
-{
+class ExecutiveMenus extends BeforeModel {
 
     /**
      * ENUM field values
@@ -37,29 +36,34 @@ class ExecutiveMenus extends \yii\db\ActiveRecord
     const DAY_OF_WEEK_VIERNES = 'viernes';
     const DAY_OF_WEEK_SABADO = 'sábado';
     const DAY_OF_WEEK_DOMINGO = 'domingo';
-	
-	public $soups = [];
+
+    public $soups = [];
+    public $proteins = [];
+    public $drinks = [];
+    public $carbs = [];
+    public $salads = [];
 
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'executive_menus';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['special_name', 'special_description', 'soup_options_json', 'protein_options_json', 'carb_options_json', 'drink_options_json', 'salad_options_json', 'additional_notes'], 'default', 'value' => null],
+            [['special_name', 'special_description', 'soup_options_json',
+            'protein_options_json', 'carb_options_json', 'drink_options_json',
+            'salad_options_json', 'additional_notes'], 'default', 'value' => null],
             [['price'], 'default', 'value' => 0.00],
             [['active'], 'default', 'value' => 1],
-            [['day_of_week', 'created', 'created_by', 'modified', 'modified_by'], 'required'],
+            [['day_of_week',], 'required'],
             [['day_of_week', 'special_description', 'additional_notes'], 'string'],
-            [['soup_options_json', 'protein_options_json', 'carb_options_json', 'drink_options_json', 'salad_options_json', 'created', 'modified'], 'safe'],
+            [['soup_options_json', 'protein_options_json', 'carb_options_json',
+            'drink_options_json', 'salad_options_json', 'created', 'modified'], 'safe'],
             [['price'], 'number'],
             [['active'], 'integer'],
             [['special_name'], 'string', 'max' => 255],
@@ -71,8 +75,7 @@ class ExecutiveMenus extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'day_of_week' => 'Día de la semana en que aplica el menú',
@@ -93,13 +96,11 @@ class ExecutiveMenus extends \yii\db\ActiveRecord
         ];
     }
 
-
     /**
      * column day_of_week ENUM value labels
      * @return string[]
      */
-    public static function optsDayOfWeek()
-    {
+    public static function optsDayOfWeek() {
         return [
             self::DAY_OF_WEEK_LUNES => 'lunes',
             self::DAY_OF_WEEK_MARTES => 'martes',
@@ -114,99 +115,85 @@ class ExecutiveMenus extends \yii\db\ActiveRecord
     /**
      * @return string
      */
-    public function displayDayOfWeek()
-    {
+    public function displayDayOfWeek() {
         return self::optsDayOfWeek()[$this->day_of_week];
     }
 
     /**
      * @return bool
      */
-    public function isDayOfWeekLunes()
-    {
+    public function isDayOfWeekLunes() {
         return $this->day_of_week === self::DAY_OF_WEEK_LUNES;
     }
 
-    public function setDayOfWeekToLunes()
-    {
+    public function setDayOfWeekToLunes() {
         $this->day_of_week = self::DAY_OF_WEEK_LUNES;
     }
 
     /**
      * @return bool
      */
-    public function isDayOfWeekMartes()
-    {
+    public function isDayOfWeekMartes() {
         return $this->day_of_week === self::DAY_OF_WEEK_MARTES;
     }
 
-    public function setDayOfWeekToMartes()
-    {
+    public function setDayOfWeekToMartes() {
         $this->day_of_week = self::DAY_OF_WEEK_MARTES;
     }
 
     /**
      * @return bool
      */
-    public function isDayOfWeekMiercoles()
-    {
+    public function isDayOfWeekMiercoles() {
         return $this->day_of_week === self::DAY_OF_WEEK_MIERCOLES;
     }
 
-    public function setDayOfWeekToMiercoles()
-    {
+    public function setDayOfWeekToMiercoles() {
         $this->day_of_week = self::DAY_OF_WEEK_MIERCOLES;
     }
 
     /**
      * @return bool
      */
-    public function isDayOfWeekJueves()
-    {
+    public function isDayOfWeekJueves() {
         return $this->day_of_week === self::DAY_OF_WEEK_JUEVES;
     }
 
-    public function setDayOfWeekToJueves()
-    {
+    public function setDayOfWeekToJueves() {
         $this->day_of_week = self::DAY_OF_WEEK_JUEVES;
     }
 
     /**
      * @return bool
      */
-    public function isDayOfWeekViernes()
-    {
+    public function isDayOfWeekViernes() {
         return $this->day_of_week === self::DAY_OF_WEEK_VIERNES;
     }
 
-    public function setDayOfWeekToViernes()
-    {
+    public function setDayOfWeekToViernes() {
         $this->day_of_week = self::DAY_OF_WEEK_VIERNES;
     }
 
     /**
      * @return bool
      */
-    public function isDayOfWeekSabado()
-    {
+    public function isDayOfWeekSabado() {
         return $this->day_of_week === self::DAY_OF_WEEK_SABADO;
     }
 
-    public function setDayOfWeekToSabado()
-    {
+    public function setDayOfWeekToSabado() {
         $this->day_of_week = self::DAY_OF_WEEK_SABADO;
     }
 
     /**
      * @return bool
      */
-    public function isDayOfWeekDomingo()
-    {
+    public function isDayOfWeekDomingo() {
         return $this->day_of_week === self::DAY_OF_WEEK_DOMINGO;
     }
 
-    public function setDayOfWeekToDomingo()
-    {
+    public function setDayOfWeekToDomingo() {
         $this->day_of_week = self::DAY_OF_WEEK_DOMINGO;
     }
+
 }
