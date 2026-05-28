@@ -16,6 +16,11 @@ export class ProductsController {
     return await this.productsService.findAll();
   }
 
+  @Get('adiciones')
+  async getAdditions() {
+    return await this.productsService.getAdditions();
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     if (isNaN(+id)) {

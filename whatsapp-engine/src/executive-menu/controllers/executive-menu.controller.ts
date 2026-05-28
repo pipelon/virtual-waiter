@@ -29,7 +29,10 @@ export class ExecutiveMenuController {
       'domingo',
     ];
     if (!day || !validDays.includes(day)) {
-      throw new HttpException('Invalid day', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        `Invalid day. Please provide one of the following values: ${validDays.join(', ')}`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
     return await this.executiveMenuService.findOneByDay(day);
   }

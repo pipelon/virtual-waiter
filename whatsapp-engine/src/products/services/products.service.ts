@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
@@ -70,5 +70,26 @@ export class ProductsService {
 
   async findOne(id: number) {
     return await this.productRepository.findOne({ where: { id } });
+  }
+
+  async getAdditions() {
+    const additions = await this.productRepository.find({
+      where: {
+        category: {
+          name: 'Adiciones',
+          active: true,
+        },
+        active: true,
+      },
+    });
+
+    if (!additions) {
+      throw new HttpException(
+        `There's not addition availables`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return additions;
   }
 }

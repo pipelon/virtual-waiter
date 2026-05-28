@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { DayOfWeek, ExecutiveMenu } from '../entities/executive-menu.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -30,7 +30,7 @@ export class ExecutiveMenuService {
   }
 
   async findOneByDay(day: DayOfWeek) {
-    return await this.executiveMenuRepository.find({
+    const menu = await this.executiveMenuRepository.find({
       where: { dayOfWeek: day },
       select: {
         id: true,
@@ -45,5 +45,14 @@ export class ExecutiveMenuService {
         price: true,
       },
     });
+
+    if (!menu || menu.length === 0) {
+      throw new HttpException(
+        'Menu not found for the specified day',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return menu;
   }
 }
