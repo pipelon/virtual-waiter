@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       autoLoadEntities: true,
       synchronize: false,
     }),
-    ProductsModule
+    ProductsModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
