@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Category } from 'src/categories/entities/category.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity('products')
 export class Product {
@@ -19,4 +26,12 @@ export class Product {
 
   @Column()
   active!: boolean;
+
+  @Column()
+  preparation_time_minutes!: number;
+
+  // 🔥 RELACIÓN MANY TO ONE (muchos productos -> una categoría)
+  @ManyToOne(() => Category, (category) => category.products)
+  @JoinColumn({ name: 'category_id' })
+  category!: Category;
 }
